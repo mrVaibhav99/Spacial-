@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Happy Birthday diksha!</title> 
+  <link href="https://fonts.googleapis.com" rel="preconnect"> 
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"> 
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&amp;family=Nunito:wght@400;700&amp;family=Shrikhand&amp;display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"> 
+  <script src="https://cdn.tailwindcss.com"></script> 
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#DA70D6',
+                        'orchid-dark': '#9932CC',
+                        'orchid-bright': '#BA55D3',
+                        'orchid-light': '#DDA0DD',
+                        'orchid-glow': '#E040FB',
+                        'orchid-soft': '#F3E5F5',
+                        'orchid-bg': '#FDF4FF',
+                        'note-purple': '#F3E5F5',
+                        'note-lavender': '#EDE7F6',
+                    },
+                    fontFamily: {
+                        hand: ['Caveat', 'cursive'],
+                        display: ['Shrikhand', 'cursive'],
+                        body: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script> 
+  <style>
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
+        .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+        .animate-seal-spin { animation: spinSeal 1.4s ease-in-out; }
+        .animate-sparkle-pop { animation: sparkle-pop 1s ease forwards; }
+        .animate-letter-emerge { animation: letter-emerge 0.8s ease forwards; }
+        .animate-glow { animation: glow 2s ease-in-out infinite alternate; }
+        .animate-confetti { animation: confettiFall 3s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes spinSeal {
+            0% { transform: rotate(0deg) scale(0.8); opacity: 0; }
+            50% { transform: rotate(180deg) scale(1.1); opacity: 1; }
+            100% { transform: rotate(360deg) scale(1); opacity: 1; }
+        }
+        @keyframes sparkle-pop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8) translateY(-20px); }
+        }
+        @keyframes letter-emerge {
+            from { transform: translateX(-50%) translateY(100%); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #DA70D6, 0 0 20px #BA55D3, 0 0 30px #E040FB; }
+            to { box-shadow: 0 0 20px #DA70D6, 0 0 40px #BA55D3, 0 0 60px #E040FB; }
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes kissRise {
+            0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0.9); opacity: 0.95; }
+            30% { transform: translateY(-30px) translateX(var(--driftX, 0px)) rotate(var(--rot, 0deg)) scale(1.05); opacity: 1; }
+            100% { transform: translateY(-140px) translateX(var(--driftX, 0px)) rotate(calc(var(--rot, 0deg) * 1.3)) scale(0.9); opacity: 0; }
+        }
+        .kiss-particle {
+            position: absolute; bottom: 0; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center;
+            transform-origin: center; will-change: transform, opacity;
+            animation: kissRise 1600ms cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        body {
+            margin: 0; font-family: 'Nunito', sans-serif;
+            background-color: #FDF4FF;
+        }
+        .orchid-gradient {
+            background: linear-gradient(135deg, #DA70D6 0%, #BA55D3 50%, #9932CC 100%);
+        }
+        .orchid-gradient-soft {
+            background: linear-gradient(135deg, #F3E5F5 0%, #FDF4FF 50%, #EDE7F6 100%);
+        }
+        .orchid-text-glow {
+            text-shadow: 0 0 10px rgba(218, 112, 214, 0.5), 0 0 20px rgba(186, 85, 211, 0.3);
+        }
+        .card-flip { perspective: 1000px; }
+        .card-flip-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .card-flip-inner.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .card-back { transform: rotateY(180deg); }
+        .music-btn-pulse {
+            animation: musicPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        /* YouTube player hidden */
+        #bg-player-container {
+            position: fixed; top: -9999px; left: -9999px;
+            width: 1px; height: 1px; opacity: 0;
+            pointer-events: none; z-index: -1;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div id="root"></div> 
+  <div id="bg-player-container">
+   <div id="bg-player"></div>
+  </div> 
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script> 
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script> 
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script> 
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script> 
+  <script src="https://www.youtube.com/iframe_api"></script> 
+  <script type="text/babel">
+        const { useState, useEffect, useRef, Fragment, useCallback } = React;
+        const { motion: F, AnimatePresence: Gp } = window.Motion;
+
+        // --- YouTube Background Music Controller ---
+        let bgPlayer = null;
+        let bgPlayerReady = false;
+        let pendingPlay = false;
+
+        window.onYouTubeIframeAPIReady = function() {
+            bgPlayer = new YT.Player('bg-player', {
+                height: '1',
+                width: '1',
+                videoId: '3CkPtuxb6FA',
+                playerVars: {
+                    autoplay: 0,
+                    start: 12,
+                    loop: 1,
+                    playlist: '3CkPtuxb6FA',
+                    controls: 0,
+                    showinfo: 0,
+                    modestbranding: 1,
+                    rel: 0
+                },
+                events: {
+                    onReady: function(event) {
+                        bgPlayerReady = true;
+                        event.target.setVolume(60);
+                        if (pendingPlay) {
+                            event.target.playVideo();
+                            pendingPlay = false;
+                        }
+                    },
+                    onStateChange: function(event) {
+                        if (event.data === YT.PlayerState.ENDED) {
+                            event.target.seekTo(12);
+                            event.target.playVideo();
+                        }
+                    }
+                }
+            });
+        };
+
+        function playBgMusic() {
+            if (bgPlayerReady && bgPlayer) {
+                bgPlayer.playVideo();
+            } else {
+                pendingPlay = true;
+            }
+        }
+        function pauseBgMusic() {
+            if (bgPlayerReady && bgPlayer) {
+                bgPlayer.pauseVideo();
+            }
+            pendingPlay = false;
+        }
+        function isBgMusicPlaying() {
+            if (bgPlayerReady && bgPlayer) {
+                return bgPlayer.getPlayerState() === YT.PlayerState.PLAYING;
+            }
+            return false;
+        }
+
+        // --- Content Data ---
+        const A = {
+            landing: {
+                welcome: "Hey, Om made something special for you...",
+                title: "Happy Birthday diksha 🎂",
+                subtitle: "A little celebration of the day you came into this world.",
+                lastLine: "Tap below when you're ready ✨",
+                button: "Open Your Gift 🎁",
+                footer: "Made with love, just for your special day 🤍"
+            },
+            letter: {
+                headerTitle: "A Birthday Note 🎂",
+                headerSubtitle: "Because today is all about you",
+                letterHeaderTitle: "Hey Diksha",
+                letterMessage: `Heyy diksha ❤️
+Diksha,
+
+Happy Birthday Diksha 🎂✨
+
+I hope your day is as special as you are. The way you stay happy, smile and enjoy little things is really nice to see. You truly have a very positive and beautiful vibe.
+
+You deserve all the happiness, success and good moments in your life. Keep shining, keep smiling and keep doing what you love.
+
+Once again, Happy Birthday Diksha 🎉💫
+
+Happy Birthday, my diksha! 💓🎂 💕🎉`,
+                letterSignature: "Always be happy, Om 🤍",
+                envelopeClickHint: "Click to open",
+                specialDeliveryText: "A Birthday Wish For You 🎂",
+                continueButton: "Keep Going ✨"
+            },
+            chillZone: {
+                heading: "Songs That Feel Like Celebration",
+                subheading: "Hope they make you smile",
+                chooseTrackHint: "Pick one & enjoy ✨",
+                continueButton: "Next ✨",
+                tracks: [
+                    { id: 1, title: "Song 1", caption: "Some feelings feel calm and deep 💫", youtubeId: "LUgpPmj6nR8" },
+                    { id: 2, title: "Song 2", caption: "Because closeness matters 🤍", youtubeId: "y_GVDbfaiwQ" },
+                    { id: 3, title: "Song 3", caption: "When emotions say more than words 💞", youtubeId: "OllAyO7Tbxg" }
+                ]
+            },
+            memoryGame: {
+                heading: "Birthday Memory Match",
+                subheading: "A little fun for your special day",
+                instruction: "Match the pairs and test your memory 🧠",
+                continueButton: "Next ✨",
+                pairs: ["🎂", "🎁", "🎈", "✨", "🎉", "💫"]
+            },
+            cards: {
+                heading: "Birthday Moments",
+                subheading: "the kind that matter",
+                instruction: "Beautiful memories, genuine feelings 🤍",
+                continueButton: "Next ✨",
+                card1Front: "Birthday Vibes 🎂",
+                card2Front: "Happy Birthday! 🎉",
+                card3Front: "Celebrating You 🎈"
+            },
+            whySpecial: {
+                heading: "Why You Matter",
+                subheading: "especially today",
+                continueButton: "Next ✨",
+                reasons: [
+                    { title: "Genuine Heart", description: "You care in ways that feel real and unforced", emoji: "💜" },
+                    { title: "Calm Presence", description: "Being with you feels peaceful and grounding", emoji: "🌸" },
+                    { title: "Kind Nature", description: "Your kindness shows up naturally, without trying", emoji: "🤍" },
+                    { title: "You Listen", description: "You pay attention, remember things, and it shows", emoji: "✨" },
+                    { title: "Soft Strength", description: "Gentle, steady, and emotionally present", emoji: "🌙" },
+                    { title: "Just You", description: "Authentic, honest, and quietly special", emoji: "💫" }
+                ]
+            },
+            finalLetter: {
+                title: "One Last Birthday Thought",
+                sealingText: "Ending this with a wish...",
+                sealButton: "Seal It 💌",
+                restartButton: "Restart",
+                sealedTitle: "Sent With Love",
+                sealedSubtitle: "Just For You, Shristi",
+                typedDefault: "Happy Birthday! 🤍",
+                experienceAgain: "See Again ✨",
+                sendKissButton: "Send a Birthday Thanks for me 🫂",
+                letterGreeting: "Hey diksha,",
+                letterParagraphs: [
+                    "This wasn't about perfection, just honesty.",
+                    "I wanted you to feel celebrated today.",
+                    "Whatever comes next, I'm glad you exist in my world."
+                ],
+                sealingNote: "Made with love by Om 💜"
+            },
+            navigation: {
+                heading: "Explore",
+                footerText: "Made with 💜 for Shristi",
+                sections: [
+                    { id: 0, label: "Start", icon: "✨" },
+                    { id: 1, label: "Letter", icon: "💌" },
+                    { id: 2, label: "Chill Zone", icon: "🎵" },
+                    { id: 3, label: "Memory Game", icon: "🧠" },
+                    { id: 4, label: "Moments", icon: "📸" },
+                    { id: 5, label: "Why Special", icon: "💜" },
+                    { id: 6, label: "Final Note", icon: "🎂" }
+                ]
+            },
+            gameStats: { moves: "Moves", matched: "Matched" },
+            loading: { title: "Something Special", subtitle: "is being prepared for you..." }
+        };
+
+        // --- Canvas Background (Orchid Petals + Confetti) ---
+        const CanvasBg = () => {
+            const canvasRef = useRef(null);
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext("2d");
+                if (!ctx) return;
+                let raf, w = window.innerWidth, h = window.innerHeight;
+                const resize = () => { w = window.innerWidth; h = window.innerHeight; canvas.width = w; canvas.height = h; };
+                window.addEventListener("resize", resize);
+                resize();
+                const particles = [];
+                const colors = ['#DA70D6', '#BA55D3', '#E040FB', '#DDA0DD', '#9932CC', '#F3E5F5'];
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * w;
+                        this.y = Math.random() * h - h;
+                        this.size = Math.random() * 10 + 4;
+                        this.speed = Math.random() * 1 + 0.4;
+                        this.opacity = Math.random() * 0.5 + 0.3;
+                        this.angle = Math.random() * Math.PI * 2;
+                        this.spin = Math.random() * 0.02 - 0.01;
+                        this.color = colors[Math.floor(Math.random() * colors.length)];
+                    }
+                    update() {
+                        this.y += this.speed;
+                        this.x += Math.sin(this.angle) * 0.5;
+                        this.angle += this.spin;
+                        if (this.y > h) { this.y = -20; this.x = Math.random() * w; }
+                    }
+                    draw() {
+                        ctx.save();
+                        ctx.translate(this.x, this.y);
+                        ctx.rotate(this.angle);
+                        ctx.globalAlpha = this.opacity;
+                        ctx.fillStyle = this.color;
+                        ctx.beginPath();
+                        ctx.ellipse(0, 0, this.size / 2, this.size, 0, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+                for (let i = 0; i < 50; i++) particles.push(new Particle());
+                const animate = () => {
+                    ctx.clearRect(0, 0, w, h);
+                    particles.forEach(p => { p.update(); p.draw(); });
+                    raf = requestAnimationFrame(animate);
+                };
+                animate();
+                return () => { window.removeEventListener("resize", resize); cancelAnimationFrame(raf); };
+            }, []);
+            return <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 5 }} />;
+        };
+
+        // --- Music Control Button ---
+        const MusicControl = ({ playing, onToggle }) => (
+            <button
+                onClick={onToggle}
+                className={`fixed top-4 right-4 z-50 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300 ${playing ? 'bg-orchid-bright animate-glow' : 'bg-gray-400'}`}
+                style={{ background: playing ? 'linear-gradient(135deg, #DA70D6, #9932CC)' : '#888' }}
+            >
+                <span className="material-icons-round text-xl">{playing ? 'music_note' : 'music_off'}</span>
+            </button>
+        );
+
+        // --- Landing Page ---
+        const LandingPage = ({ onEnter }) => {
+            const [typed, setTyped] = useState("");
+            const fullText = A.landing.welcome;
+            useEffect(() => {
+                let i = 0;
+                const timer = setInterval(() => {
+                    if (i <= fullText.length) { setTyped(fullText.slice(0, i)); i++; }
+                    else clearInterval(timer);
+                }, 50);
+                return () => clearInterval(timer);
+            }, []);
+            return (
+                <F.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative" style={{ background: 'linear-gradient(180deg, #FDF4FF 0%, #F3E5F5 50%, #EDE7F6 100%)' }}>
+                    <F.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3, type: "spring" }} className="mb-6">
+                        <img src="assets/cake.png" alt="Birthday Cake" className="w-40 h-40 object-contain animate-float mx-auto" />
+                    </F.div>
+                    <F.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="font-hand text-xl text-orchid-dark mb-4 min-h-[2rem]">
+                        {typed}<span className="animate-pulse">|</span>
+                    </F.p>
+                    <F.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5 }} className="font-display text-4xl md:text-5xl orchid-text-glow mb-4" style={{ color: '#9932CC' }}>
+                        {A.landing.title}
+                    </F.h1>
+                    <F.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="font-body text-gray-600 mb-2 max-w-md">
+                        {A.landing.subtitle}
+                    </F.p>
+                    <F.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} className="font-hand text-lg text-orchid-bright mb-8">
+                        {A.landing.lastLine}
+                    </F.p>
+                    <F.button
+                        initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 3, type: "spring" }}
+                        whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                        onClick={onEnter}
+                        className="px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl animate-glow transition-all"
+                        style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}
+                    >
+                        {A.landing.button}
+                    </F.button>
+                    <F.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.5 }} className="mt-10 text-sm text-gray-400 font-body">
+                        {A.landing.footer}
+                    </F.p>
+                </F.div>
+            );
+        };
+
+        // --- Letter Section ---
+        const LetterSection = ({ onContinue }) => {
+            const [opened, setOpened] = useState(false);
+            return (
+                <F.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen flex flex-col items-center justify-center px-4 py-12" style={{ background: 'linear-gradient(180deg, #FDF4FF, #F3E5F5)' }}>
+                    <F.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-3xl text-orchid-dark mb-2 text-center">{A.letter.headerTitle}</F.h2>
+                    <p className="font-hand text-lg text-orchid-bright mb-8 text-center">{A.letter.headerSubtitle}</p>
+                    {!opened ? (
+                        <F.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => setOpened(true)}
+                            className="cursor-pointer w-72 h-48 rounded-2xl flex flex-col items-center justify-center shadow-xl relative overflow-hidden"
+                            style={{ background: 'linear-gradient(135deg, #DA70D6, #BA55D3)' }}>
+                            <span className="text-6xl mb-2">💌</span>
+                            <p className="text-white font-bold text-lg">{A.letter.specialDeliveryText}</p>
+                            <p className="text-white/70 text-sm mt-1 animate-pulse">{A.letter.envelopeClickHint}</p>
+                        </F.div>
+                    ) : (
+                        <F.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring" }}
+                            className="w-full max-w-lg mx-auto rounded-2xl shadow-xl p-8 relative"
+                            style={{ background: 'linear-gradient(135deg, #FFFDE7, #FFF9C4, #FFF8E1)' }}>
+                            <div className="absolute top-3 right-3 text-2xl animate-spin-slow">✨</div>
+                            <h3 className="font-display text-2xl text-orchid-dark mb-4">{A.letter.letterHeaderTitle}</h3>
+                            <p className="font-hand text-lg text-gray-700 whitespace-pre-line leading-relaxed">{A.letter.letterMessage}</p>
+                            <p className="font-hand text-xl text-orchid-dark mt-6 text-right">{A.letter.letterSignature}</p>
+                        </F.div>
+                    )}
+                    {opened && (
+                        <F.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+                            whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                            onClick={onContinue}
+                            className="mt-8 px-8 py-3 rounded-full text-white font-bold shadow-lg"
+                            style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                            {A.letter.continueButton}
+                        </F.button>
+                    )}
+                </F.div>
+            );
+        };
+
+        // --- Chill Zone (Music) ---
+        const ChillZone = ({ onContinue, onTrackPlay }) => {
+            const [activeTrack, setActiveTrack] = useState(null);
+            const handlePlay = (track) => {
+                setActiveTrack(track.id === activeTrack ? null : track.id);
+                if (onTrackPlay) onTrackPlay(track.id !== activeTrack);
+            };
+            return (
+                <F.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen flex flex-col items-center px-4 py-12" style={{ background: 'linear-gradient(180deg, #FDF4FF, #EDE7F6)' }}>
+                    <F.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-3xl text-orchid-dark mb-2 text-center">{A.chillZone.heading}</F.h2>
+                    <p className="font-hand text-lg text-orchid-bright mb-2 text-center">{A.chillZone.subheading}</p>
+                    <p className="text-sm text-gray-400 mb-8 text-center">{A.chillZone.chooseTrackHint}</p>
+                    <div className="w-full max-w-lg space-y-4">
+                        {A.chillZone.tracks.map((track) => (
+                            <F.div key={track.id} whileHover={{ scale: 1.02 }}
+                                className={`rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ${activeTrack === track.id ? 'ring-2 ring-orchid-glow' : ''}`}
+                                style={{ background: activeTrack === track.id ? 'linear-gradient(135deg, #F3E5F5, #EDE7F6)' : 'white' }}>
+                                <div className="p-4 cursor-pointer flex items-center gap-4" onClick={() => handlePlay(track)}>
+                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white shadow-md ${activeTrack === track.id ? 'music-btn-pulse' : ''}`}
+                                        style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                                        <span className="material-icons-round">{activeTrack === track.id ? 'pause' : 'play_arrow'}</span>
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-orchid-dark">{track.title}</p>
+                                        <p className="text-sm text-gray-500">{track.caption}</p>
+                                    </div>
+                                </div>
+                                {activeTrack === track.id && (
+                                    <F.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} className="px-4 pb-4">
+                                        <div className="rounded-xl overflow-hidden" style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+                                            <iframe
+                                                src={`https://www.youtube.com/embed/${track.youtubeId}?autoplay=1&rel=0`}
+                                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                                                frameBorder="0"
+                                                allow="autoplay; encrypted-media"
+                                                allowFullScreen
+                                            ></iframe>
+                                        </div>
+                                    </F.div>
+                                )}
+                            </F.div>
+                        ))}
+                    </div>
+                    <F.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                        onClick={onContinue}
+                        className="mt-10 px-8 py-3 rounded-full text-white font-bold shadow-lg"
+                        style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                        {A.chillZone.continueButton}
+                    </F.button>
+                </F.div>
+            );
+        };
+
+        // --- Memory Game ---
+        const MemoryGame = ({ onContinue }) => {
+            const allPairs = A.memoryGame.pairs;
+            const [cards, setCards] = useState([]);
+            const [flipped, setFlipped] = useState([]);
+            const [matched, setMatched] = useState([]);
+            const [moves, setMoves] = useState(0);
+            const [gameWon, setGameWon] = useState(false);
+
+            useEffect(() => {
+                const shuffled = [...allPairs, ...allPairs]
+                    .sort(() => Math.random() - 0.5)
+                    .map((emoji, i) => ({ id: i, emoji, flipped: false }));
+                setCards(shuffled);
+            }, []);
+
+            const handleFlip = (id) => {
+                if (flipped.length === 2 || matched.includes(id) || flipped.includes(id)) return;
+                const newFlipped = [...flipped, id];
+                setFlipped(newFlipped);
+                if (newFlipped.length === 2) {
+                    setMoves(m => m + 1);
+                    const [first, second] = newFlipped;
+                    if (cards[first].emoji === cards[second].emoji) {
+                        setMatched(prev => {
+                            const newMatched = [...prev, first, second];
+                            if (newMatched.length === cards.length) setGameWon(true);
+                            return newMatched;
+                        });
+                        setFlipped([]);
+                    } else {
+                        setTimeout(() => setFlipped([]), 800);
+                    }
+                }
+            };
+
+            return (
+                <F.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen flex flex-col items-center px-4 py-12" style={{ background: 'linear-gradient(180deg, #FDF4FF, #F3E5F5)' }}>
+                    <F.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-3xl text-orchid-dark mb-2 text-center">{A.memoryGame.heading}</F.h2>
+                    <p className="font-hand text-lg text-orchid-bright mb-2 text-center">{A.memoryGame.subheading}</p>
+                    <p className="text-sm text-gray-400 mb-4 text-center">{A.memoryGame.instruction}</p>
+                    <div className="flex gap-6 mb-6">
+                        <div className="text-center"><p className="text-sm text-gray-500">{A.gameStats.moves}</p><p className="font-bold text-2xl text-orchid-dark">{moves}</p></div>
+                        <div className="text-center"><p className="text-sm text-gray-500">{A.gameStats.matched}</p><p className="font-bold text-2xl text-orchid-dark">{matched.length / 2}/{allPairs.length}</p></div>
+                    </div>
+                    <div className="grid grid-cols-4 gap-3 max-w-sm mx-auto mb-8">
+                        {cards.map((card) => {
+                            const isFlipped = flipped.includes(card.id) || matched.includes(card.id);
+                            return (
+                                <F.div key={card.id} whileTap={{ scale: 0.9 }}
+                                    onClick={() => handleFlip(card.id)}
+                                    className={`w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center cursor-pointer shadow-md text-2xl transition-all duration-300 ${isFlipped ? 'bg-white' : ''}`}
+                                    style={{ background: isFlipped ? 'white' : 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                                    {isFlipped ? card.emoji : <span className="text-white text-lg">🎂</span>}
+                                </F.div>
+                            );
+                        })}
+                    </div>
+                    {gameWon && (
+                        <F.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-center mb-6">
+                            <p className="font-display text-2xl text-orchid-dark">You did it! 🎉</p>
+                            <p className="font-hand text-lg text-orchid-bright">Happy Birthday celebration complete!</p>
+                        </F.div>
+                    )}
+                    <F.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                        onClick={onContinue}
+                        className="px-8 py-3 rounded-full text-white font-bold shadow-lg"
+                        style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                        {A.memoryGame.continueButton}
+                    </F.button>
+                </F.div>
+            );
+        };
+
+        // --- Cards Section (with user images) ---
+        const CardsSection = ({ onContinue }) => {
+            const cardData = [
+                { front: A.cards.card1Front, img: "assets/pic1.jpg" },
+                { front: A.cards.card2Front, img: "assets/pic2.jpg" },
+                { front: A.cards.card3Front, img: "assets/pic3.jpg" }
+            ];
+            const [flippedCards, setFlippedCards] = useState({});
+            const toggleFlip = (i) => setFlippedCards(prev => ({ ...prev, [i]: !prev[i] }));
+
+            return (
+                <F.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen flex flex-col items-center px-4 py-12" style={{ background: 'linear-gradient(180deg, #FDF4FF, #EDE7F6)' }}>
+                    <F.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-3xl text-orchid-dark mb-2 text-center">{A.cards.heading}</F.h2>
+                    <p className="font-hand text-lg text-orchid-bright mb-2 text-center">{A.cards.subheading}</p>
+                    <p className="text-sm text-gray-400 mb-8 text-center">{A.cards.instruction}</p>
+                    <div className="w-full max-w-lg space-y-6">
+                        {cardData.map((card, i) => (
+                            <F.div key={i} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }}
+                                onClick={() => toggleFlip(i)}
+                                className="cursor-pointer card-flip mx-auto" style={{ height: '280px', maxWidth: '380px' }}>
+                                <div className={`card-flip-inner w-full h-full ${flippedCards[i] ? 'flipped' : ''}`}>
+                                    <div className="card-front w-full h-full rounded-2xl shadow-xl flex flex-col items-center justify-center p-6"
+                                        style={{ background: 'linear-gradient(135deg, #DA70D6, #BA55D3, #9932CC)' }}>
+                                        <span className="text-5xl mb-4">🎂</span>
+                                        <p className="font-display text-xl text-white text-center">{card.front}</p>
+                                        <p className="text-white/60 text-sm mt-2 animate-pulse">Tap to see</p>
+                                    </div>
+                                    <div className="card-back w-full h-full rounded-2xl shadow-xl overflow-hidden">
+                                        <img src={card.img} alt={card.front} className="w-full h-full object-cover rounded-2xl" />
+                                    </div>
+                                </div>
+                            </F.div>
+                        ))}
+                    </div>
+                    <F.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                        onClick={onContinue}
+                        className="mt-10 px-8 py-3 rounded-full text-white font-bold shadow-lg"
+                        style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                        {A.cards.continueButton}
+                    </F.button>
+                </F.div>
+            );
+        };
+
+        // --- Why Special ---
+        const WhySpecial = ({ onContinue }) => (
+            <F.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen flex flex-col items-center px-4 py-12" style={{ background: 'linear-gradient(180deg, #FDF4FF, #F3E5F5)' }}>
+                <F.h2 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="font-display text-3xl text-orchid-dark mb-2 text-center">{A.whySpecial.heading}</F.h2>
+                <p className="font-hand text-lg text-orchid-bright mb-8 text-center">{A.whySpecial.subheading}</p>
+                <div className="w-full max-w-lg space-y-4">
+                    {A.whySpecial.reasons.map((reason, i) => (
+                        <F.div key={i} initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.15 }}
+                            className="flex items-start gap-4 p-5 rounded-2xl shadow-md bg-white/80 backdrop-blur-sm">
+                            <span className="text-3xl">{reason.emoji}</span>
+                            <div>
+                                <p className="font-bold text-orchid-dark text-lg">{reason.title}</p>
+                                <p className="text-gray-600 text-sm">{reason.description}</p>
+                            </div>
+                        </F.div>
+                    ))}
+                </div>
+                <F.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    onClick={onContinue}
+                    className="mt-10 px-8 py-3 rounded-full text-white font-bold shadow-lg"
+                    style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                    {A.whySpecial.continueButton}
+                </F.button>
+            </F.div>
+        );
+
+        // --- Final Letter ---
+        const FinalLetter = ({ onRestart }) => {
+            const [sealed, setSealed] = useState(false);
+            const [hugs, setHugs] = useState([]);
+            const sendHug = () => {
+                const id = Date.now();
+                const left = Math.random() * 80 + 10;
+                setHugs(prev => [...prev, { id, left }]);
+                setTimeout(() => setHugs(prev => prev.filter(h => h.id !== id)), 2000);
+            };
+            const today = new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+            return (
+                <F.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #FDF4FF, #EDE7F6, #F3E5F5)' }}>
+                    {hugs.map(h => (
+                        <div key={h.id} className="kiss-particle" style={{ left: `${h.left}%`, '--driftX': `${(Math.random()-0.5)*40}px`, '--rot': `${(Math.random()-0.5)*30}deg` }}>
+                            <span className="text-3xl">🫂</span>
+                        </div>
+                    ))}
+                    {!sealed ? (
+                        <F.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="w-full max-w-lg mx-auto text-center">
+                            <h2 className="font-display text-3xl text-orchid-dark mb-4">{A.finalLetter.title}</h2>
+                            <div className="rounded-2xl shadow-xl p-8 mb-6" style={{ background: 'linear-gradient(135deg, #FFFDE7, #FFF9C4)' }}>
+                                <p className="font-hand text-xl text-orchid-dark mb-4">{A.finalLetter.letterGreeting}</p>
+                                {A.finalLetter.letterParagraphs.map((p, i) => (
+                                    <F.p key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.5 }}
+                                        className="font-body text-gray-700 mb-3">{p}</F.p>
+                                ))}
+                                <p className="font-hand text-lg text-orchid-dark mt-4 text-right">{A.finalLetter.typedDefault}</p>
+                                <p className="text-sm text-gray-400 mt-2">{today}</p>
+                            </div>
+                            <p className="font-hand text-lg text-orchid-bright mb-4">{A.finalLetter.sealingText}</p>
+                            <F.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                                onClick={() => setSealed(true)}
+                                className="px-8 py-3 rounded-full text-white font-bold shadow-lg animate-glow"
+                                style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                                {A.finalLetter.sealButton}
+                            </F.button>
+                        </F.div>
+                    ) : (
+                        <F.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }} className="text-center">
+                            <div className="animate-seal-spin inline-block mb-6">
+                                <div className="w-32 h-32 rounded-full flex items-center justify-center shadow-2xl mx-auto"
+                                    style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                                    <span className="text-5xl">🎂</span>
+                                </div>
+                            </div>
+                            <h2 className="font-display text-3xl text-orchid-dark mb-2">{A.finalLetter.sealedTitle}</h2>
+                            <p className="font-hand text-xl text-orchid-bright mb-6">{A.finalLetter.sealedSubtitle}</p>
+                            <img src="assets/birthday-banner.jpg" alt="Happy Birthday" className="w-64 h-36 object-cover rounded-2xl shadow-lg mx-auto mb-6" />
+                            <p className="text-sm text-gray-400 mb-6">{A.finalLetter.sealingNote}</p>
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                                <F.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                                    onClick={sendHug}
+                                    className="px-6 py-3 rounded-full text-white font-bold shadow-lg"
+                                    style={{ background: 'linear-gradient(135deg, #DA70D6, #9932CC)' }}>
+                                    {A.finalLetter.sendKissButton}
+                                </F.button>
+                                <F.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                                    onClick={onRestart}
+                                    className="px-6 py-3 rounded-full font-bold shadow-lg border-2"
+                                    style={{ borderColor: '#DA70D6', color: '#9932CC' }}>
+                                    {A.finalLetter.experienceAgain}
+                                </F.button>
+                            </div>
+                        </F.div>
+                    )}
+                </F.div>
+            );
+        };
+
+        // --- Navigation Dots ---
+        const NavDots = ({ currentSection, totalSections, onNav }) => (
+            <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex gap-2 bg-white/80 backdrop-blur-md rounded-full px-4 py-2 shadow-lg">
+                {Array.from({ length: totalSections }, (_, i) => (
+                    <button key={i} onClick={() => onNav(i)}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${i === currentSection ? 'scale-125' : 'opacity-50'}`}
+                        style={{ background: i === currentSection ? 'linear-gradient(135deg, #DA70D6, #9932CC)' : '#DDA0DD' }}
+                    />
+                ))}
+            </div>
+        );
+
+        // --- Loading Screen ---
+        const LoadingScreen = ({ onDone }) => {
+            useEffect(() => {
+                const timer = setTimeout(onDone, 2500);
+                return () => clearTimeout(timer);
+            }, []);
+            return (
+                <div className="min-h-screen flex flex-col items-center justify-center" style={{ background: 'linear-gradient(180deg, #FDF4FF, #F3E5F5)' }}>
+                    <F.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
+                        <img src="assets/cake.png" alt="Birthday" className="w-32 h-32 object-contain animate-float mx-auto mb-6" />
+                    </F.div>
+                    <F.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                        className="font-display text-3xl orchid-text-glow" style={{ color: '#9932CC' }}>{A.loading.title}</F.h1>
+                    <F.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
+                        className="font-hand text-xl text-orchid-bright mt-2">{A.loading.subtitle}</F.p>
+                    <F.div initial={{ width: 0 }} animate={{ width: '200px' }} transition={{ delay: 0.8, duration: 1.5 }}
+                        className="h-1 rounded-full mt-6" style={{ background: 'linear-gradient(90deg, #DA70D6, #9932CC, #E040FB)' }} />
+                </div>
+            );
+        };
+
+        // --- Main App ---
+        const App = () => {
+            const [loading, setLoading] = useState(true);
+            const [section, setSection] = useState(0);
+            const [bgPlaying, setBgPlaying] = useState(false);
+            const totalSections = 7;
+
+            const toggleBgMusic = () => {
+                if (bgPlaying) {
+                    pauseBgMusic();
+                    setBgPlaying(false);
+                } else {
+                    playBgMusic();
+                    setBgPlaying(true);
+                }
+            };
+
+            const handleEnter = () => {
+                playBgMusic();
+                setBgPlaying(true);
+                setSection(1);
+            };
+
+            const handleTrackPlay = (isPlaying) => {
+                if (isPlaying && bgPlaying) {
+                    pauseBgMusic();
+                    setBgPlaying(false);
+                }
+            };
+
+            const goNext = () => setSection(s => Math.min(s + 1, totalSections - 1));
+            const goTo = (s) => setSection(s);
+            const restart = () => setSection(0);
+
+            if (loading) return <LoadingScreen onDone={() => setLoading(false)} />;
+
+            return (
+                <div className="relative">
+                    <CanvasBg />
+                    {section > 0 && <MusicControl playing={bgPlaying} onToggle={toggleBgMusic} />}
+                    {section > 0 && section < totalSections && <NavDots currentSection={section} totalSections={totalSections} onNav={goTo} />}
+                    <div className="relative z-10">
+                        <Gp mode="wait">
+                            {section === 0 && <LandingPage key="landing" onEnter={handleEnter} />}
+                            {section === 1 && <LetterSection key="letter" onContinue={goNext} />}
+                            {section === 2 && <ChillZone key="chill" onContinue={goNext} onTrackPlay={handleTrackPlay} />}
+                            {section === 3 && <MemoryGame key="memory" onContinue={goNext} />}
+                            {section === 4 && <CardsSection key="cards" onContinue={goNext} />}
+                            {section === 5 && <WhySpecial key="why" onContinue={goNext} />}
+                            {section === 6 && <FinalLetter key="final" onRestart={restart} />}
+                        </Gp>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>  
+ </body>
+</html>
